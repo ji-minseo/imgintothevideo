@@ -1,9 +1,12 @@
-let video, img, cl, ctxl, c_tmp, ctx_tmp;
+let video, img, cl, ctxl, c_tmp, ctx_tmp, input, imagesArray;
 function init() {
   video = document.getElementById('video')
 
   cl = document.getElementById('output-canvas')
   ctxl = cl.getContext('2d')
+  input = document.querySelector("input")
+  imagesArray = []
+
 
   img = new Image();
 
@@ -15,6 +18,14 @@ function init() {
   ctx_tmp = c_tmp.getContext('2d')
 
   video.addEventListener('play', computeFrame)
+
+  input.addEventListener("change", function() {
+    const file = input.files
+    imagesArray.push(file[0])
+    console.log(URL.createObjectURL(input.files[0]))
+    img.src = URL.createObjectURL(input.files[0])
+  })
+  
 }
 
 function computeFrame() {
