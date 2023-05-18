@@ -1,0 +1,22 @@
+$primary: #FF008A;
+$sub_primary: #31E6FF;
+
+* {
+    box-sizing: border-box;
+    position: relative;
+}
+body {
+    margin: 0;
+    padding: 0;
+    // background: $sub_primary;
+    font-family: 'Noto Sans KR', sans-serif;
+
+}
+.main-section {
+    width: 100%;
+    height: 100vh;
+    canvas {
+      width: 100%;
+      height: 100vh;
+    }
+  }
