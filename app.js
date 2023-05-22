@@ -50,9 +50,11 @@ function computeFrame() {
         console.log(i)
       }
       if(endX < i) endX = i
-    
     }
   }
+
+    const ratio = (imgWidth * imgHeight)/((endX - startX) / 4)
+
 
   for(let j = startX; j < endX; j++) {
     let r = frame.data[j * 4 + 0]
@@ -62,13 +64,6 @@ function computeFrame() {
         frame.data[j * 4 + 0] = frame2.data[(j - (startX - endX)) * 4 + 0]
         frame.data[j * 4 + 1] = frame2.data[(j - (startX - endX)) * 4 + 1]
         frame.data[j * 4 + 2] = frame2.data[(j - (startX - endX)) * 4 + 2]
-
-
-        // frame.data[j * 4 + 0] = frame2.data[(j - (endX - startX)/4) * (((endX - startX)/4)/(imgWidth*imgHeight)*100) * 4 + 0]
-        // frame.data[j * 4 + 1] = frame2.data[(j - (endX - startX)/4) * (((endX - startX)/4)/(imgWidth*imgHeight)*100) * 4 + 1]
-        // frame.data[j * 4 + 2] = frame2.data[(j - (endX - startX)/4) * (((endX - startX)/4)/(imgWidth*imgHeight)*100) * 4 + 2]
-  
-
   
       }
 
