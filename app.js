@@ -1,4 +1,4 @@
-let video, img, cl, ctxl, c_tmp, ctx_tmp, input, imagesArray, imgWidth, imgHeight;
+let video, img, cl, ctxl, c_tmp, ctx_tmp, input, imagesArray, imgWidth, imgHeight, ratiox, ratioy, ctx_tmp2;
 function init() {
   video = document.getElementById('video')
 
@@ -6,7 +6,9 @@ function init() {
   ctxl = cl.getContext('2d')
   input = document.querySelector("input")
   imagesArray = []
-
+  
+  ratiox = 276
+  ratioy = 240
 
   img = new Image();
 
@@ -19,6 +21,9 @@ function init() {
   c_tmp.setAttribute('width', 800)
   c_tmp.setAttribute('height', 1200)
   ctx_tmp = c_tmp.getContext('2d')
+  ctx_tmp2 = c_tmp.getContext('2d')
+  ctx_tmp2.drawImage(img, 0, 0, img.width, img.height)
+  ctx_tmp2.scale(ratiox/img.width, ratioy/img.height)
 
   video.addEventListener('play', computeFrame)
 
@@ -36,8 +41,9 @@ function computeFrame() {
   let frame = ctx_tmp.getImageData(0, 0, video.videoWidth/10, video.videoHeight/5)
 
 
-  ctx_tmp.drawImage(img, 0, 0, video.videoWidth/10, video.videoHeight/5)
-  let frame2 = ctx_tmp.getImageData(0, 0, video.videoWidth/10, video.videoHeight/5)
+  ctx_tmp2.drawImage(img, 0, 0, video.videoWidth/10, video.videoHeight/5)
+  
+  let frame2 = ctx_tmp2.getImageData(0, 0, video.videoWidth/10, video.videoHeight/5)
   let startX = 0;
   let endX = 0
   for (let i = 0; i < frame.data.length / 4; i++) {
