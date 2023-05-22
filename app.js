@@ -36,8 +36,8 @@ function computeFrame() {
   let frame = ctx_tmp.getImageData(0, 0, video.videoWidth/10, video.videoHeight/5)
 
 
-  ctx_tmp.drawImage(img, 0, 0, video.videoWidth/imgWidth * 100, video.videoHeight/imgHeight * 100)
-  let frame2 = ctx_tmp.getImageData(0, 0, video.videoWidth/imgWidth * 100, video.videoHeight/imgHeight * 100)
+  ctx_tmp.drawImage(img, 0, 0, imgWidth, imgHeight)
+  let frame2 = ctx_tmp.getImageData(0, 0, imgWidth, imgHeight)
   let startX = 0;
   let endX = 0
   for (let i = 0; i < frame.data.length / 4; i++) {
@@ -50,16 +50,30 @@ function computeFrame() {
         console.log(i)
       }
       if(endX < i) endX = i
-      console.log(endX)
     
-      frame.data[i * 4 + 0] = frame2.data[(i - startX) * 4 + 0]
-      frame.data[i * 4 + 1] = frame2.data[(i - startX) * 4 + 1]
-      frame.data[i * 4 + 2] = frame2.data[(i - startX) * 4 + 2]
     }
-  
   }
 
+  for(let j = startX; j < endX; j++) {
+    let r = frame.data[j * 4 + 0]
+    let g = frame.data[j * 4 + 1]
+    let b = frame.data[j * 4 + 2]
+      if (r > 40 && r < 90 && g > 100 && g < 200 && b > 10 && b < 170) {
+        frame.data[j * 4 + 0] = frame2.data[(j - (startX - endX)) * 4 + 0]
+        frame.data[j * 4 + 1] = frame2.data[(j - (startX - endX)) * 4 + 1]
+        frame.data[j * 4 + 2] = frame2.data[(j - (startX - endX)) * 4 + 2]
 
+
+        // frame.data[j * 4 + 0] = frame2.data[(j - (endX - startX)/4) * (((endX - startX)/4)/(imgWidth*imgHeight)*100) * 4 + 0]
+        // frame.data[j * 4 + 1] = frame2.data[(j - (endX - startX)/4) * (((endX - startX)/4)/(imgWidth*imgHeight)*100) * 4 + 1]
+        // frame.data[j * 4 + 2] = frame2.data[(j - (endX - startX)/4) * (((endX - startX)/4)/(imgWidth*imgHeight)*100) * 4 + 2]
+  
+
+  
+      }
+
+
+  }
 
   ctxl.putImageData(frame, 0, 0)
   setTimeout(computeFrame, 0)
