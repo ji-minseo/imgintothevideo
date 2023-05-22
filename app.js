@@ -36,8 +36,8 @@ function computeFrame() {
   let frame = ctx_tmp.getImageData(0, 0, video.videoWidth/10, video.videoHeight/5)
 
 
-  ctx_tmp.drawImage(img, 0, 0, imgWidth/5, imgHeight/1)
-  let frame2 = ctx_tmp.getImageData(0, 0, imgWidth/5, imgHeight/1)
+  ctx_tmp.drawImage(img, 0, 0, video.videoWidth/imgWidth * 100, video.videoHeight/imgHeight * 100)
+  let frame2 = ctx_tmp.getImageData(0, 0, video.videoWidth/imgWidth * 100, video.videoHeight/imgHeight * 100)
   let startX = 0;
   let endX = 0
   for (let i = 0; i < frame.data.length / 4; i++) {
@@ -49,8 +49,8 @@ function computeFrame() {
         startX = i
         console.log(i)
       }
-      // if(endX < i) endX = i
-      // console.log(endX)
+      if(endX < i) endX = i
+      console.log(endX)
     
       frame.data[i * 4 + 0] = frame2.data[(i - startX) * 4 + 0]
       frame.data[i * 4 + 1] = frame2.data[(i - startX) * 4 + 1]
