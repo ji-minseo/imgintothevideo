@@ -7,7 +7,7 @@ function init() {
   input = document.querySelector("input")
   imagesArray = []
   
-  ratiox = 320
+  ratiox = 300
   ratioy = 300
 
   img = new Image();
@@ -48,7 +48,9 @@ function computeFrame() {
     let r = frame.data[i * 4 + 0]
     let g = frame.data[i * 4 + 1]
     let b = frame.data[i * 4 + 2]
-    if (r > 40 && r < 90 && g > 100 && g < 200 && b > 10 && b < 170) {
+    // if (r > 40 && r < 90 && g > 100 && g < 200 && b > 10 && b < 170) {
+    if (r > 0 && r < 130 && g > 150 && g < 300 && b > -100 && b < 300) {
+
       if(startX == 0) {
         startX = i
         
@@ -57,9 +59,9 @@ function computeFrame() {
     
 
 
-      frame.data[i * 4 + 0] = frame2.data[(i - startX) * 4 + 0]
-      frame.data[i * 4 + 1] = frame2.data[(i - startX) * 4 + 1]
-      frame.data[i * 4 + 2] = frame2.data[(i - startX) * 4 + 2]
+      frame.data[i * 4 + 0] = frame2.data[(i - startX - 1000) * 4 + 0]
+      frame.data[i * 4 + 1] = frame2.data[(i - startX - 1000) * 4 + 1]
+      frame.data[i * 4 + 2] = frame2.data[(i - startX - 1000) * 4 + 2]
 
       // frame.data[i * 4 + 0] = frame2.data[(i - (startX - endX)) * 4 + 0]
       // frame.data[i * 4 + 1] = frame2.data[(i - (startX - endX)) * 4 + 1]
